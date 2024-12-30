@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+#include <conio.h>
 
 // Structure pour stocker les détails des clients
 struct CustomerDetails {
@@ -127,6 +129,66 @@ void list() {
     getchar();
 }
 
+void edit() {
+    FILE *f;
+    int k = 1;  // Variable pour vérifier si l'enregistrement est trouvé
+    char roomnumber[20];  // Numéro de chambre à rechercher
+    long int size = sizeof(s);  // Taille d'une structure CustomerDetails
+
+    // Ouvrir le fichier en lecture et écriture
+    if ((f = fopen("add.txt", "r+")) == NULL) {
+        printf("Error opening file! Exiting...\n");
+        exit(0);
+    }
+
+    // Demander à l'utilisateur le numéro de chambre à modifier
+    system("cls");
+    printf("Enter Room number of the customer to edit:\n\n");
+    scanf("%[^\n]", roomnumber);  // Lire le numéro de chambre saisi par l'utilisateur
+    while (getchar() != '\n');  // Nettoyer le tampon d'entrée
+
+    // Parcourir le fichier pour trouver l'enregistrement correspondant
+    while (fread(&s, sizeof(s), 1, f) == 1) {
+        if (strcmp(s.roomnumber, roomnumber) == 0) {
+            k = 0;  // Indiquer que l'enregistrement a été trouvé
+
+            // Demander les nouveaux détails au client
+            printf("\nEnter New Room Number: ");
+            fgets(s.roomnumber, sizeof(s.roomnumber), stdin);
+            s.roomnumber[strcspn(s.roomnumber, "\n")] = '\0';  // Supprimer le '\n'
+
+            printf("\nEnter New Name: ");
+            fgets(s.name, sizeof(s.name), stdin);
+            s.name[strcspn(s.name, "\n")] = '\0';  // Supprimer le '\n'
+
+            printf("\nEnter New Address: ");
+            fgets(s.address, sizeof(s.address), stdin);
+            s.address[strcspn(s.address, "\n")] = '\0';  // Supprimer le '\n'
+
+            printf("\nEnter New Phone Number: ");
+            fgets(s.phonenumber, sizeof(s.phonenumber), stdin);
+            s.phonenumber[strcspn(s.phonenumber, "\n")] = '\0';  // Supprimer le '\n'
+
+
+            // Partie de Ines 
+
+
+            // Sauvegarder les modifications dans le fichier
+            fseek(f, -size, SEEK_CUR);  // Revenir au début de l'enregistrement actuel
+            fwrite(&s, sizeof(s), 1, f);  // Réécrire les données modifiées
+            break;  // Sortir de la boucle après modification
+        }
+    }
+
+    fclose(f);  // Fermer le fichier après les modifications
+
+
+    // Partie de Ines 
+
+
+}
+
+
 // Fonction principale
 int main() {
     int option;
@@ -135,7 +197,8 @@ int main() {
         system("cls");
         printf("1. Add Customer\n");
         printf("2. View Customer List\n");
-        printf("3. Exit\n");
+        printf("3. Edit Customer Record\n");
+        printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &option);
 
@@ -150,6 +213,9 @@ int main() {
                 list();
                 break;
             case 3:
+                edit();
+                break;
+            case 4:
                 printf("\nExiting program...\n");
                 exit(0);
             default:
