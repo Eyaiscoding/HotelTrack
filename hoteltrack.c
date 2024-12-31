@@ -4,6 +4,22 @@
 #include <windows.h>
 #include <conio.h>
 
+void setcolor(int Forgc)
+{WORD WColor;
+HANDLE hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
+CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi))
+{ wColor=(csbi.WAttributes & 0xB0)+(Forgc & 0x0B);
+// SetConsoleTextAttributes(hStdOut,wColor);
+   SetConsoleTextAttribute(hStdOut,wColor);
+}
+}
+
+  
+
+
+
 // Structure pour stocker les détails des clients
 struct CustomerDetails {
     char roomnumber[10];
