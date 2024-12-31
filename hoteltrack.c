@@ -144,6 +144,24 @@ void list() {
     printf("\nPress any key to exit");
     getchar();
 }
+void search()
+{
+system("cls");
+   FILE*f;
+   char roomnuber[20];
+   int flag=1;
+   f=fopen("add.txt","r+");
+   if(f==0)
+		 exit(0);
+	fflush(stdin);
+   printf("Enter Room number of the customer to search its details : \n");
+   scanf("%s", roomnumber);
+   while(fread(&s,sizeof(s),1,f)==1)
+   {
+       if(strcmp(s.roomnumber,roomnumber)==0{
+
+   
+
 
 void edit() {
     FILE *f;
