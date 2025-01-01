@@ -193,7 +193,27 @@ system("cls");
    while(fread(&s,sizeof(s),1,f)==1)
    {
        if(strcmp(s.roomnumber,roomnumber)==0{
-
+           flag=0;
+           printf("\n\tRecord Found\n");
+           printf("\nRoom Number: \t%s",s.roomnumber);
+           printf(\nName:\t%s",s.name);
+           printf(\nAddress:\t%s",s.address);
+           printf(\nPhone number:\t%s",s.phonenumber);
+	   printf("\nNationality:\t%s",s.nationality);
+           printf("\nEmail:\t%s",s.email);
+           printf("\nPeriod:\t%s",s.period);
+           printf("\nArrival date:\t%s",s.arrivaldate);
+           flag=0;
+           break;
+       }
+   }
+   if (flag==1){
+        printf("\n\tRequested Customer could not be found!);
+    
+    } 
+    getch();
+    fclose(f);
+}
    
 
 
@@ -237,8 +257,24 @@ void edit() {
             fgets(s.phonenumber, sizeof(s.phonenumber), stdin);
             s.phonenumber[strcspn(s.phonenumber, "\n")] = '\0';  // Supprimer le '\n'
 
+	    printf("\Enter New Nationality:");
+	    fgets(s.nationality,sizeof(s.nationalty),stdin);
+	    s.nationality[strcspn(s.nationality,"\n")]='\0'
 
-            // Partie de Ines 
+	    printf("Enter New Email:");
+	    fgets(s.email,sizeof(s.email),stdin);
+	    s.email[strcspn(s.email,"\n")]='0'
+
+	    printf("Enter New Period:");
+	    fgets(s.period,sizeof(s.period),stdin);
+	    s.period[strcspn(s.period,"\n")]='0'
+
+	    printf(Enter New Arrival date:");
+	    fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
+	    s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0'
+
+
+            
 
 
             // Sauvegarder les modifications dans le fichier
@@ -248,12 +284,18 @@ void edit() {
         }
     }
 
-    fclose(f);  // Fermer le fichier après les modifications
+    
 
 
-    // Partie de Ines 
-
-
+   if(k==1){
+	   printf("\n\nTHE RECORD DOESN'T EXIST!!!");
+	   fclose(f);  // Fermer le fichier après les modifications
+	   getch();
+   }else {
+	   fclose(f);
+	   printf(\n\n\t\tYOURRECORD IS SUCCESSFULLY EDITED!!!");
+           getch();
+	   }
 }
 
 
