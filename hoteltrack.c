@@ -260,6 +260,8 @@ void edit() {
 // Fonction principale
 int main() {
     int option;
+    login();
+    system("cls");
 
     while (1) {
         system("cls");
