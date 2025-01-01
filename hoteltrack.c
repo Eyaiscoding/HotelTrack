@@ -16,7 +16,41 @@ if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi))
 }
 }
 
-  
+void login()
+{	
+    int i=0;
+    char given_user[10],given_pass[10]; 
+    char username[10]="user",password[10]="pass";
+do
+{
+    system("cls");
+    printf("\n  **************************  LOGIN  **************************  ");
+    printf(" \n                       ENTER USERNAME:");
+    scanf("%s", &given_user); 
+	
+    printf(" \n                       ENTER PASSWORD:");
+	while(i<10)
+	{
+	    given_pass[i]=getch();
+	    if(given_pass[i]==13) break;
+	    else printf("*");
+	    i++;
+	}
+	given_pass[i]='\0';
+	i=0; 
+	if(strcmp(given_user,username)==0 && strcmp(given_pass,password)==0)
+	{
+		printf("  \n\n\n       LOGIN IS SUCCESSFUL");
+		break;
+	}
+	else
+	{
+		printf("\n        LOGIN IS UNSUCESSFUL");
+		getch();
+	}
+}
+while(1);	
+}  
 
 
 
