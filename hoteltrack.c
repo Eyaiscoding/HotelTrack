@@ -178,6 +178,47 @@ void list() {
     printf("\nPress any key to exit");
     getchar();
 }
+
+void delete()
+{
+	FILE *f,*t;
+	int i=1;
+	char roomnumber[20];
+	if((t=fopen("temp.txt","w"))==NULL)
+	exit(0);
+	if((f=fopen("add.txt","r"))==NULL)
+	exit(0);
+	system("cls");
+	printf("Enter the Room Number of the hotel to be deleted from the database: \n");
+	scanf("%s",roomnumber);
+	while(fread(&s,sizeof(s),1,f)==1)
+	{
+		if(strcmp(s.roomnumber,roomnumber)==0)
+		{      
+			 i=0;
+		}
+		else
+		{
+			fwrite(&s,sizeof(s),1,t);
+		}
+	}
+	if(i==1)
+	{       
+		printf("\n\n Records of Customer in this Room number is not found!!");
+		getch();
+		fclose(f);
+		fclose(t);
+		main();
+	}
+	fclose(f);
+	fclose(t);
+	remove("add.txt");
+	rename("temp.txt","add.txt");
+	printf("\n\nThe Customer is successfully removed....");
+	getch();
+
+}
+
 void search()
 {
 system("cls");
@@ -310,7 +351,8 @@ int main() {
         printf("1. Add Customer\n");
         printf("2. View Customer List\n");
         printf("3. Edit Customer Record\n");
-        printf("4. Exit\n");
+	printf("4. delete Customer Record\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &option);
 
@@ -327,7 +369,10 @@ int main() {
             case 3:
                 edit();
                 break;
-            case 4:
+	    case 4:
+                delete();
+                break;
+            case 5:
                 printf("\nExiting program...\n");
                 exit(0);
             default:
