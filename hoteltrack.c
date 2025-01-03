@@ -223,22 +223,24 @@ void delete()
 
 void search()
 {
-system("cls");
+system("cls"); //nettoyage de l'éran
    FILE*f;
-   char roomnuber[20];
-   int flag=1;
-   f=fopen("add.txt","r+");
-   if(f==0)
-		 exit(0);
-	fflush(stdin);
+   char roomnuber[20]; //variable pour stocker le numéro de chambre
+   int flag=1; //variable de controle pour vérifier si le client est trouvé
+   f=fopen("add.txt","r+"); //ouvertude du fichier pour lecture et écriture
+   if(f==0) //si le fichier ne s'ouvre pas ,quitter le programme
+	   exit(0);
+   fflush(stdin); //nettoyage du tampon d'entrée standard
    printf("Enter Room number of the customer to search its details : \n");
-   scanf("%s", roomnumber);
-   while(fread(&s,sizeof(s),1,f)==1)
+   scanf("%s", roomnumber); //entrée du numéro de chambre à rechercher
+  
+   while(fread(&s,sizeof(s),1,f)==1) //lecture de chaque enregistrement dans le fichier
    {
-       if(strcmp(s.roomnumber,roomnumber)==0{
-           flag=0;
+       if(strcmp(s.roomnumber,roomnumber)==0 // comparaison du numéro de chambre avec celui entré
+       {
+           flag=0; // le client a été trouvé
            printf("\n\tRecord Found\n");
-           printf("\nRoom Number: \t%s",s.roomnumber);
+           printf("\nRoom Number: \t%s",s.roomnumber); //affichage des détals du client
            printf(\nName:\t%s",s.name);
            printf(\nAddress:\t%s",s.address);
            printf(\nPhone number:\t%s",s.phonenumber);
@@ -250,12 +252,13 @@ system("cls");
            break;
        }
    }
-   if (flag==1){
+   if (flag==1)//si aucun client n'a été trouvé 
+   {
         printf("\n\tRequested Customer could not be found!);
     
     } 
-    getch();
-    fclose(f);
+    getch(); //attente de la pression d'une touche pour continuer
+    fclose(f); //fermeture du fichier
 }
    
 
