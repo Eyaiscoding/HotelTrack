@@ -154,32 +154,31 @@ void list() {
     }
 
     system("cls");
-    printf("ROOM    ");
-    printf("NAME\t ");
-    printf("\tADDRESS ");
-    printf("\tPHONENUMBER ");
-    printf("\tNATIONALITY ");
-    printf("\tEMAIL ");
-    printf("\t\t  PERIOD ");
-    printf("\t ARRIVALDATE \n");
 
-    for (i = 0; i < 118; i++)
+    // Affichage des en-têtes alignés
+    printf("%-10s %-20s %-25s %-15s %-15s %-30s %-10s %-15s\n",
+           "ROOM", "NAME", "ADDRESS", "PHONE", "NATIONALITY", "EMAIL", "PERIOD", "ARRIVAL DATE");
+
+    for (i = 0; i < 150; i++)  // Ligne séparatrice
         printf("-");
 
-    // Lire et afficher chaque enregistrement
+    printf("\n");
+
+    // Lire et afficher chaque enregistrement avec alignement
     while (fread(&s, sizeof(s), 1, f) == 1) {
-        printf("\n%s \t%s \t\t%s \t\t%s \t%s  \t%s  \t     %s  \t  %s",
+        printf("%-10s %-20s %-25s %-15s %-15s %-30s %-10s %-15s\n",
                s.roomnumber, s.name, s.address, s.phonenumber,
                s.nationality, s.email, s.period, s.arrivaldate);
     }
-    printf("\n");
 
-    for (i = 0; i < 118; i++)
+    for (i = 0; i < 150; i++)  // Ligne séparatrice
         printf("-");
+
+    printf("\n");
 
     fclose(f);
     printf("\nPress any key to exit");
-    getchar();
+    getchar();  // Attend une touche pour quitter
 }
 
 void delete()
@@ -194,6 +193,7 @@ void delete()
 		exit(0);
 
 	system("cls"); // Efface l'écran
+    printf("Enter the Room Number of the hotel to be deleted from the database: \n");
 	scanf("%s", roomnumber); // Lit le numéro de chambre
 	while (fread(&s, sizeof(s), 1, f) == 1) // Parcourt les enregistrements
 	{
@@ -208,6 +208,7 @@ void delete()
 	}
 	if (i == 1) // Si aucun enregistrement trouvé
 	{       
+        printf("\n\n Records of Customer are not found");
 		getch(); // Attend une touche
 		fclose(f);
 		fclose(t);
@@ -217,6 +218,7 @@ void delete()
 	fclose(t); // Ferme le fichier temporaire
 	remove("add.txt"); // Supprime le fichier principal
 	rename("temp.txt", "add.txt"); // Renomme le fichier temporaire en principal
+    printf("\n\nThe Customer is successfully removed");
 	getch(); // Attend une touche
 }
 
@@ -304,15 +306,15 @@ void edit() {
 
 	        printf("Enter New Email:");
 	        fgets(s.email,sizeof(s.email),stdin);
-	        s.email[strcspn(s.email,"\n")]='0';
+	        s.email[strcspn(s.email,"\n")]='\0';
 
 	        printf("Enter New Period:");
 	        fgets(s.period,sizeof(s.period),stdin);
-	        s.period[strcspn(s.period,"\n")]='0';
+	        s.period[strcspn(s.period,"\n")]='\0';
 
 	        printf("Enter New Arrival date:");
 	        fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
-	        s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0';
+	        s.arrivaldate[strcspn(s.arrivaldate,"\n")]='\0';
 
             // Sauvegarder les modifications dans le fichier
             fseek(f, -size, SEEK_CUR);  // Revenir au début de l'enregistrement actuel
@@ -343,16 +345,15 @@ int main() {
     char choice; //variable pour stocker le choix du menu
     
     system("cls"); //nettoyage de l'écran
-    setcolor(15); //appel de la fonction setcolor pour définir la couleur du texte à blanc (15)
     printf("-------------------------------------------------------------------------\n");
     printf("|                                                                         |\n");
     printf("|                                                                         |\n");
     printf("|  OOOOOO   OOOOOO OOOOOO OOOOOO OOOOOO OOOOOO O      O OOOOOOO  OOOOOO   |\n");
     printf("|  O        O    O O      O        O      O    O O    O O        O        |\n"); 
     printf("|  O  OOOOO OOOOOO OOOOO  OOOOO    O      O    O  O   O O  OOOOO OOOOOO   |\n");
-    printf("|  O    O   O  O   O      O        O      O    O   O  O O    O        O   |n");
-    printf("|  OOOOOO   O   O  OOOOOO OOOOOO   O    OOOOOO O    O O OOOOOO   OOOOOO   |n");
-    printf("|                                                                         |n");
+    printf("|  O    O   O  O   O      O        O      O    O   O  O O    O        O   |\n");
+    printf("|  OOOOOO   O   O  OOOOOO OOOOOO   O    OOOOOO O    O O OOOOOO   OOOOOO   |\n");
+    printf("|                                                                         |\n");
     printf("-------------------------------------------------------------------------\n");
     printf("\t\t*************************************************\n");
     printf("\t\t*                                               *\n");
@@ -360,7 +361,7 @@ int main() {
     printf("\t\t*             WELCOME TO HOTEL X                *\n");
     printf("\t\t*       -----------------------------           *\n");
     printf("\t\t*                                               *\n");
-    printf("\t\t*************************************************\n\n\n");
+    printf("\t\t*************************************************\n\n");
     printf("\n Press any key to continue:");// invitation à appuyer sur une touche pour continuer
    
     getch();
@@ -370,7 +371,7 @@ int main() {
 
     while (1) {
         system("cls");
-        printf("Enter your choice: ");
+        printf("Enter your choice:\n");
         printf("1. Add Customer\n");
         printf("2. View Customer List\n");
         printf("3. Edit Customer Record\n");
@@ -380,7 +381,6 @@ int main() {
         scanf("%d", &choice);
 
         while (getchar() != '\n');
-
         switch (choice) {
             case 1:
                 add();
