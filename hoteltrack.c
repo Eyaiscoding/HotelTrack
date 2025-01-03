@@ -259,8 +259,6 @@ system("cls"); //nettoyage de l'éran
     getch(); //attente de la pression d'une touche pour continuer
     fclose(f); //fermeture du fichier
 }
-   
-
 
 void edit() {
     FILE *f;
@@ -318,10 +316,6 @@ void edit() {
 	    fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
 	    s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0'
 
-
-            
-
-
             // Sauvegarder les modifications dans le fichier
             fseek(f, -size, SEEK_CUR);  // Revenir au début de l'enregistrement actuel
             fwrite(&s, sizeof(s), 1, f);  // Réécrire les données modifiées
@@ -347,8 +341,6 @@ void edit() {
 // Fonction principale
 int main() {
     int i=0; //initialisation de la variable i pour le compteur
-    time_t t; //déclaration de la variable t pour stocker le temps
-    time(&t); //récupération de l'heure actuelle 
     char customername; //variable pour le nom du client
     char choice; //variable pour stocker le choix du menu
     
@@ -367,26 +359,14 @@ int main() {
     printf("\t\t*************************************************\n");
     printf("\t\t*                                               *\n");
     printf("\t\t*       -----------------------------           *\n");
-    printf("\t\t*        WELCOME TO HOTEL DESERT CAVE           *\n");
+    printf("\t\t*             WELCOME TO HOTEL X                *\n");
     printf("\t\t*       -----------------------------           *\n");
     printf("\t\t*                                               *\n");
-    printf("\t\t*                                               *\n");
-    printf("\t\t*                                               *\n");
-    printf("\t\t*    Brought To You By code-projects.org        *\n");
-    printf("\t\t*                 ESP,XYZ                       *\n");
-    printf("\t\t*     CONTACT US:18-87454575552,035455852       *\n"
     printf("\t\t*************************************************\n\n\n");
-    for (i=0;i<80;i++) //afichage de la barre horizontale 
-	    printf("-");
-    printf("\nCurrent date and time :%s",ctime(&t)); //affichage de la date et de l'heure actuelles
-    for(i=0;i<80;i++)//affichage de la barre horizontale
-	    printf("-");
     printf("\n Press any key to continue:");// invitation à appuyer sur une touche pour continuer
    
     getch();
     system("cls");
-	
-    int option;
     login();
     system("cls");
 
@@ -395,8 +375,9 @@ int main() {
         printf("1. Add Customer\n");
         printf("2. View Customer List\n");
         printf("3. Edit Customer Record\n");
-	printf("4. delete Customer Record\n");
-        printf("5. Exit\n");
+	printf("4. search Customer Record\n");
+	printf("5. delete Customer Record\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &option);
 
@@ -414,9 +395,12 @@ int main() {
                 edit();
                 break;
 	    case 4:
+                search();
+                break;
+	    case 5:
                 delete();
                 break;
-            case 5:
+            case 6:
                 printf("\nExiting program...\n");
                 exit(0);
             default:
