@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+#include <windows.h> //pour manipuler les attributs de couleur du terminal
 #include <conio.h>
 
 void setcolor(int Forgc)
-{WORD WColor;
-HANDLE hStdOut=GetStdHandle(STD_OUTPUT_HANDLE);
-CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi))
-{ wColor=(csbi.WAttributes & 0xB0)+(Forgc & 0x0B);
-// SetConsoleTextAttributes(hStdOut,wColor);
-   SetConsoleTextAttribute(hStdOut,wColor);
-}
+{WORD WColor; //variable pour stocker les informations de couleur
+HANDLE hStdOut=GetStdHandle(STD_OUTPUT_HANDLE); //obtenir la poignée du terminal
+CONSOLE_SCREEN_BUFFER_INFO csbi; //structure pour les informations sur le tampon de l'ecran
+ 
+//vérifier les informations sur le tampon de l'éran
+if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi)){
+	// calculer les nouveaux attributs de couleur
+	wColor=(csbi.WAttributes & 0xB0)+(Forgc & 0x0B);
+       // définir les nouveaux attributs de couleur pour l'affichage
+       SetConsoleTextAttribute(hStdOut,wColor);
+     }
 }
 
 void login()
@@ -310,7 +312,7 @@ void edit() {
 	    fgets(s.period,sizeof(s.period),stdin);
 	    s.period[strcspn(s.period,"\n")]='0'
 
-	    printf(Enter New Arrival date:");
+	    printf("Enter New Arrival date:");
 	    fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
 	    s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0'
 
@@ -326,15 +328,15 @@ void edit() {
     }
 
     
-
+// vérifier si l'enregistrement a été trouver ou non
 
    if(k==1){
 	   printf("\n\nTHE RECORD DOESN'T EXIST!!!");
 	   fclose(f);  // Fermer le fichier après les modifications
-	   getch();
+	   getch(); // attendre une entrée utilisateur
    }else {
 	   fclose(f);
-	   printf(\n\n\t\tYOURRECORD IS SUCCESSFULLY EDITED!!!");
+	   printf("\n\n\t\tYOUR RECORD IS SUCCESSFULLY EDITED!!!");
            getch();
 	   }
 }
@@ -342,6 +344,40 @@ void edit() {
 
 // Fonction principale
 int main() {
+    int i=0;
+    time_t t;
+    time(&t);
+    char customername;
+    char choice;
+    system("cls");
+    setcolor(15);
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+    printf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
     int option;
     login();
     system("cls");
