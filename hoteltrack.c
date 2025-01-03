@@ -224,7 +224,7 @@ void search()
 {
 system("cls"); //nettoyage de l'éran
    FILE*f;
-   char roomnuber[20]; //variable pour stocker le numéro de chambre
+   char roomnumber[20]; //variable pour stocker le numéro de chambre
    int flag=1; //variable de controle pour vérifier si le client est trouvé
    f=fopen("add.txt","r+"); //ouvertude du fichier pour lecture et écriture
    if(f==0) //si le fichier ne s'ouvre pas ,quitter le programme
@@ -232,28 +232,27 @@ system("cls"); //nettoyage de l'éran
    fflush(stdin); //nettoyage du tampon d'entrée standard
    printf("Enter Room number of the customer to search its details : \n");
    scanf("%s", roomnumber); //entrée du numéro de chambre à rechercher
-  
    while(fread(&s,sizeof(s),1,f)==1) //lecture de chaque enregistrement dans le fichier
    {
-       if(strcmp(s.roomnumber,roomnumber)==0 // comparaison du numéro de chambre avec celui entré
+       if(strcmp(s.roomnumber,roomnumber)==0)// comparaison du numéro de chambre avec celui entré
        {
            flag=0; // le client a été trouvé
            printf("\n\tRecord Found\n");
            printf("\nRoom Number: \t%s",s.roomnumber); //affichage des détals du client
-           printf(\nName:\t%s",s.name);
-           printf(\nAddress:\t%s",s.address);
-           printf(\nPhone number:\t%s",s.phonenumber);
-	   printf("\nNationality:\t%s",s.nationality);
+           printf("\nName:\t%s",s.name);
+           printf("\nAddress:\t%s",s.address);
+           printf("\nPhone number:\t%s",s.phonenumber);
+	       printf("\nNationality:\t%s",s.nationality);
            printf("\nEmail:\t%s",s.email);
            printf("\nPeriod:\t%s",s.period);
            printf("\nArrival date:\t%s",s.arrivaldate);
-           flag=0;
            break;
        }
    }
+
    if (flag==1)//si aucun client n'a été trouvé 
    {
-        printf("\n\tRequested Customer could not be found!);
+        printf("\n\tRequested Customer could not be found!");
     
     } 
     getch(); //attente de la pression d'une touche pour continuer
@@ -282,7 +281,6 @@ void edit() {
     while (fread(&s, sizeof(s), 1, f) == 1) {
         if (strcmp(s.roomnumber, roomnumber) == 0) {
             k = 0;  // Indiquer que l'enregistrement a été trouvé
-
             // Demander les nouveaux détails au client
             printf("\nEnter New Room Number: ");
             fgets(s.roomnumber, sizeof(s.roomnumber), stdin);
@@ -300,21 +298,21 @@ void edit() {
             fgets(s.phonenumber, sizeof(s.phonenumber), stdin);
             s.phonenumber[strcspn(s.phonenumber, "\n")] = '\0';  // Supprimer le '\n'
 
-	    printf("\Enter New Nationality:");
-	    fgets(s.nationality,sizeof(s.nationalty),stdin);
-	    s.nationality[strcspn(s.nationality,"\n")]='\0'
+	        printf("\Enter New Nationality:");
+	        fgets(s.nationality,sizeof(s.nationality),stdin);
+	        s.nationality[strcspn(s.nationality,"\n")]='\0';
 
-	    printf("Enter New Email:");
-	    fgets(s.email,sizeof(s.email),stdin);
-	    s.email[strcspn(s.email,"\n")]='0'
+	        printf("Enter New Email:");
+	        fgets(s.email,sizeof(s.email),stdin);
+	        s.email[strcspn(s.email,"\n")]='0';
 
-	    printf("Enter New Period:");
-	    fgets(s.period,sizeof(s.period),stdin);
-	    s.period[strcspn(s.period,"\n")]='0'
+	        printf("Enter New Period:");
+	        fgets(s.period,sizeof(s.period),stdin);
+	        s.period[strcspn(s.period,"\n")]='0';
 
-	    printf("Enter New Arrival date:");
-	    fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
-	    s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0'
+	        printf("Enter New Arrival date:");
+	        fgets(s.arrivaldate,sizeof(s.arrivaldate),stdin);
+	        s.arrivaldate[strcspn(s.arrivaldate,"\n")]='0';
 
             // Sauvegarder les modifications dans le fichier
             fseek(f, -size, SEEK_CUR);  // Revenir au début de l'enregistrement actuel
@@ -372,19 +370,18 @@ int main() {
 
     while (1) {
         system("cls");
+        printf("Enter your choice: ");
         printf("1. Add Customer\n");
         printf("2. View Customer List\n");
         printf("3. Edit Customer Record\n");
-	printf("4. search Customer Record\n");
-	printf("5. delete Customer Record\n");
+	    printf("4. search Customer Record\n");
+	    printf("5. delete Customer Record\n");
         printf("6. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &option);
+        scanf("%d", &choice);
 
-        // Nettoyage du tampon
         while (getchar() != '\n');
 
-        switch (option) {
+        switch (choice) {
             case 1:
                 add();
                 break;
@@ -394,10 +391,10 @@ int main() {
             case 3:
                 edit();
                 break;
-	    case 4:
+	         case 4:
                 search();
                 break;
-	    case 5:
+	          case 5:
                 delete();
                 break;
             case 6:
