@@ -20,40 +20,41 @@ if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi)){
 
 void login()
 {	
-    int i=0;
-    char given_user[10],given_pass[10]; 
-    char username[10]="user",password[10]="pass";
-do
-{
-    system("cls");
-    printf("\n  **************************  LOGIN  **************************  ");
-    printf(" \n                       ENTER USERNAME:");
-    scanf("%s", &given_user); 
-	
-    printf(" \n                       ENTER PASSWORD:");
-	while(i<10)
-	{
-	    given_pass[i]=getch();
-	    if(given_pass[i]==13) break;
-	    else printf("*");
-	    i++;
-	}
-	given_pass[i]='\0';
-	i=0; 
-	if(strcmp(given_user,username)==0 && strcmp(given_pass,password)==0)
-	{
-		printf("  \n\n\n       LOGIN IS SUCCESSFUL");
-		break;
-	}
-	else
-	{
-		printf("\n        LOGIN IS UNSUCESSFUL");
-		getch();
-	}
-}
-while(1);	
-}  
+    int i = 0; // Compteur pour la saisie du mot de passe
+    char given_user[10], given_pass[10]; // Variables pour les entrées utilisateur
+    char username[10] = "user", password[10] = "pass"; // Identifiants prédéfinis
+    do
+    {
+        system("cls"); // Efface l'écran
+        printf("\n  **************************  LOGIN  **************************  ");
+        printf(" \n                       ENTER USERNAME:"); 
+        scanf("%s", &given_user); 
+		
+        printf(" \n                       ENTER PASSWORD:");
+        while (i < 10) // Boucle pour la saisie du mot de passe
+        {
+            given_pass[i] = getch(); // Lit un caractère sans l'afficher
+            if (given_pass[i] == 13) break; // Arrête sur "Entrée"
+            else printf("*"); // Masque le mot de passe
+            i++;
+        }
+        given_pass[i] = '\0'; // Termine la chaîne de caractères
+        i = 0; // Réinitialise le compteur
 
+        // Vérifie si les identifiants correspondent
+        if (strcmp(given_user, username) == 0 && strcmp(given_pass, password) == 0)
+        {
+            printf("  \n\n\n       LOGIN IS SUCCESSFUL");
+            break; // Quitte la boucle en cas de succès
+        }
+        else
+        {
+            printf("\n        LOGIN IS UNSUCCESSFUL");
+            getch(); // Attend une touche avant de réessayer
+        }
+    }
+    while (1); // Boucle infinie pour les tentatives
+}
 
 
 // Structure pour stocker les détails des clients
