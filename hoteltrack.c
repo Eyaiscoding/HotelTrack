@@ -20,7 +20,7 @@ if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi)){
 
 void login()
 {	
-    int i = 0; // Compteur pour la saisie du mot de passe
+    int i = 0;
     char given_user[10], given_pass[10]; // Variables pour les entrées utilisateur
     char username[10] = "user", password[10] = "pass"; // Identifiants prédéfinis
     do
@@ -184,42 +184,40 @@ void list() {
 
 void delete()
 {
-	FILE *f,*t;
-	int i=1;
-	char roomnumber[20];
-	if((t=fopen("temp.txt","w"))==NULL)
-	exit(0);
-	if((f=fopen("add.txt","r"))==NULL)
-	exit(0);
-	system("cls");
-	printf("Enter the Room Number of the hotel to be deleted from the database: \n");
-	scanf("%s",roomnumber);
-	while(fread(&s,sizeof(s),1,f)==1)
+	FILE *f, *t;
+	int i = 1; 
+	char roomnumber[20]; 
+
+	if ((t = fopen("temp.txt", "w")) == NULL) // Crée un fichier temporaire
+		exit(0);
+	if ((f = fopen("add.txt", "r")) == NULL) // Ouvre le fichier principal
+		exit(0);
+
+	system("cls"); // Efface l'écran
+	scanf("%s", roomnumber); // Lit le numéro de chambre
+	while (fread(&s, sizeof(s), 1, f) == 1) // Parcourt les enregistrements
 	{
-		if(strcmp(s.roomnumber,roomnumber)==0)
+		if (strcmp(s.roomnumber, roomnumber) == 0) // Si l'enregistrement correspond
 		{      
-			 i=0;
+			i = 0; // Enregistrement trouvé
 		}
 		else
 		{
-			fwrite(&s,sizeof(s),1,t);
+			fwrite(&s, sizeof(s), 1, t); // Copie les enregistrements restants
 		}
 	}
-	if(i==1)
+	if (i == 1) // Si aucun enregistrement trouvé
 	{       
-		printf("\n\n Records of Customer in this Room number is not found!!");
-		getch();
+		getch(); // Attend une touche
 		fclose(f);
 		fclose(t);
-		main();
+		main(); // Retourne au menu principal
 	}
-	fclose(f);
-	fclose(t);
-	remove("add.txt");
-	rename("temp.txt","add.txt");
-	printf("\n\nThe Customer is successfully removed....");
-	getch();
-
+	fclose(f); // Ferme le fichier principal
+	fclose(t); // Ferme le fichier temporaire
+	remove("add.txt"); // Supprime le fichier principal
+	rename("temp.txt", "add.txt"); // Renomme le fichier temporaire en principal
+	getch(); // Attend une touche
 }
 
 void search()
