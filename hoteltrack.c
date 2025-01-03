@@ -344,39 +344,45 @@ void edit() {
 
 // Fonction principale
 int main() {
-    int i=0;
-    time_t t;
-    time(&t);
-    char customername;
-    char choice;
+    int i=0; //initialisation de la variable i pour le compteur
+    time_t t; //déclaration de la variable t pour stocker le temps
+    time(&t); //récupération de l'heure actuelle 
+    char customername; //variable pour le nom du client
+    char choice; //variable pour stocker le choix du menu
+    
+    system("cls"); //nettoyage de l'écran
+    setcolor(15); //appel de la fonction setcolor pour définir la couleur du texte à blanc (15)
+    printf("-------------------------------------------------------------------------\n");
+    printf("|                                                                         |\n");
+    printf("|                                                                         |\n");
+    printf("|  OOOOOO   OOOOOO OOOOOO OOOOOO OOOOOO OOOOOO O      O OOOOOOO  OOOOOO   |\n");
+    printf("|  O        O    O O      O        O      O    O O    O O        O        |\n"); 
+    printf("|  O  OOOOO OOOOOO OOOOO  OOOOO    O      O    O  O   O O  OOOOO OOOOOO   |\n");
+    printf("|  O    O   O  O   O      O        O      O    O   O  O O    O        O   |n");
+    printf("|  OOOOOO   O   O  OOOOOO OOOOOO   O    OOOOOO O    O O OOOOOO   OOOOOO   |n");
+    printf("|                                                                         |n");
+    printf("-------------------------------------------------------------------------\n");
+    printf("\t\t*************************************************\n");
+    printf("\t\t*                                               *\n");
+    printf("\t\t*       -----------------------------           *\n");
+    printf("\t\t*        WELCOME TO HOTEL DESERT CAVE           *\n");
+    printf("\t\t*       -----------------------------           *\n");
+    printf("\t\t*                                               *\n");
+    printf("\t\t*                                               *\n");
+    printf("\t\t*                                               *\n");
+    printf("\t\t*    Brought To You By code-projects.org        *\n");
+    printf("\t\t*                 ESP,XYZ                       *\n");
+    printf("\t\t*     CONTACT US:18-87454575552,035455852       *\n"
+    printf("\t\t*************************************************\n\n\n");
+    for (i=0;i<80;i++) //afichage de la barre horizontale 
+	    printf("-");
+    printf("\nCurrent date and time :%s",ctime(&t)); //affichage de la date et de l'heure actuelles
+    for(i=0;i<80;i++)//affichage de la barre horizontale
+	    printf("-");
+    printf("\n Press any key to continue:");// invitation à appuyer sur une touche pour continuer
+   
+    getch();
     system("cls");
-    setcolor(15);
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-    printf
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
     int option;
     login();
