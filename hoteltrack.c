@@ -341,70 +341,109 @@ void edit() {
 
 // Fonction principale
 int main() {
-    int i=0; //initialisation de la variable i pour le compteur
-    char customername; //variable pour le nom du client
-    char choice; //variable pour stocker le choix du menu
-    
-    system("cls"); //nettoyage de l'écran
-    printf("-------------------------------------------------------------------------\n");
+    int i = 0; // Initialisation de la variable i pour les boucles
+    char choice; // Variable pour stocker le choix du menu
+    time_t t;    // Pour obtenir l'heure actuelle
+    time(&t);    // Charger l'heure dans la variable t
+
+    // Nettoyer l'écran et afficher l'introduction
+    system("cls");
+    setcolor(15); // Couleur par défaut (Blanc vif)
+    printf(" -------------------------------------------------------------------------\n");
     printf("|                                                                         |\n");
     printf("|                                                                         |\n");
     printf("|  OOOOOO   OOOOOO OOOOOO OOOOOO OOOOOO OOOOOO O      O OOOOOOO  OOOOOO   |\n");
-    printf("|  O        O    O O      O        O      O    O O    O O        O        |\n"); 
+    printf("|  O        O    O O      O        O      O    O O    O O        O        |\n");
     printf("|  O  OOOOO OOOOOO OOOOO  OOOOO    O      O    O  O   O O  OOOOO OOOOOO   |\n");
     printf("|  O    O   O  O   O      O        O      O    O   O  O O    O        O   |\n");
     printf("|  OOOOOO   O   O  OOOOOO OOOOOO   O    OOOOOO O    O O OOOOOO   OOOOOO   |\n");
     printf("|                                                                         |\n");
-    printf("-------------------------------------------------------------------------\n");
+    printf(" -------------------------------------------------------------------------\n");
     printf("\t\t*************************************************\n");
     printf("\t\t*                                               *\n");
     printf("\t\t*       -----------------------------           *\n");
-    printf("\t\t*             WELCOME TO HOTEL X                *\n");
+    printf("\t\t*            WELCOME TO HOTEL X                 *\n");
     printf("\t\t*       -----------------------------           *\n");
     printf("\t\t*                                               *\n");
-    printf("\t\t*************************************************\n\n");
-    printf("\n Press any key to continue:");// invitation à appuyer sur une touche pour continuer
-   
+    printf("\t\t*************************************************\n\n\n");
+
+    // Ligne de séparation et date actuelle
+    for (i = 0; i < 80; i++) printf("-");
+    printf("\nCurrent date and time : %s", ctime(&t));
+    for (i = 0; i < 80; i++) printf("-");
+    printf("\n Press any key to continue:");
     getch();
+
     system("cls");
-    login();
+    login();  // Appel de la fonction de connexion
     system("cls");
 
+    // Boucle principale
     while (1) {
         system("cls");
-        printf("Enter your choice:\n");
-        printf("1. Add Customer\n");
-        printf("2. View Customer List\n");
-        printf("3. Edit Customer Record\n");
-	    printf("4. search Customer Record\n");
-	    printf("5. delete Customer Record\n");
-        printf("6. Exit\n");
-        scanf("%d", &choice);
+        setcolor(10); // Vert pour le menu principal
+        for (i = 0; i < 80; i++) printf("-");
+        printf("\n   ******************************  |MAIN MENU|  ***************************** \n");
+        for (i = 0; i < 80; i++) printf("-");
 
-        while (getchar() != '\n');
+        printf("\n");
+        printf("\t\t *Please enter your choice for menu*:\n");
+        printf(" \n Enter 1 -> Book a room");
+        printf("\n------------------------");
+        printf(" \n Enter 2 -> View Customer Record");
+        printf("\n----------------------------------");
+        printf(" \n Enter 3 -> Delete Customer Record");
+        printf("\n-----------------------------------");
+        printf(" \n Enter 4 -> Search Customer Record");
+        printf("\n-----------------------------------");
+        printf(" \n Enter 5 -> Edit Record");
+        printf("\n-----------------------");
+        printf(" \n Enter 6 -> Exit");
+        printf("\n-----------------");
+        printf("\n");
+
+        // Ligne de séparation et date actuelle
+        for (i = 0; i < 80; i++) printf("-");
+        printf("\nCurrent date and time : %s", ctime(&t));
+        for (i = 0; i < 80; i++) printf("-");
+
+        // Lecture du choix utilisateur
+        choice = getche();
+        choice = toupper(choice); // Convertir en majuscule
+
         switch (choice) {
-            case 1:
+            case '1':
+                setcolor(14); // Jaune pour ajouter une réservation
                 add();
                 break;
-            case 2:
+            case '2':
+                setcolor(11); // Cyan pour afficher les clients
                 list();
                 break;
-            case 3:
-                edit();
+            case '3':
+                setcolor(12); // Rouge pour la suppression
+                delete1();
                 break;
-	         case 4:
+            case '4':
+                setcolor(13); // Magenta pour la recherche
                 search();
                 break;
-	          case 5:
-                delete();
+            case '5':
+                setcolor(9); // Bleu pour la modification
+                edit();
                 break;
-            case 6:
-                printf("\nExiting program...\n");
+            case '6':
+                setcolor(12); // Rouge pour le message de sortie
+                system("cls");
+                printf("\n\n\t *****THANK YOU*****");
+                printf("\n\t FOR TRUSTING OUR SERVICE");
                 exit(0);
             default:
-                printf("\nInvalid choice. Try again.\n");
+                setcolor(14); // Jaune pour les erreurs
+                system("cls");
+                printf("Incorrect Input");
+                printf("\n Press any key to continue");
+                getch();
         }
     }
-
-    return 0;
 }
