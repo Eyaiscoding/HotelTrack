@@ -4,18 +4,19 @@
 #include <windows.h> //pour manipuler les attributs de couleur du terminal
 #include <conio.h>
 
-void setcolor(int Forgc)
-{WORD WColor; //variable pour stocker les informations de couleur
-HANDLE hStdOut=GetStdHandle(STD_OUTPUT_HANDLE); //obtenir la poignée du terminal
-CONSOLE_SCREEN_BUFFER_INFO csbi; //structure pour les informations sur le tampon de l'ecran
+// Fonction pour définir la couleur du texte
+void setcolor(int Forgc) {
+    WORD WColor; // Variable pour stocker les informations de couleur
+    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE); // Obtenir la poignée du terminal
+    CONSOLE_SCREEN_BUFFER_INFO csbi; // Structure pour les informations sur le tampon de l'écran
  
-//vérifier les informations sur le tampon de l'éran
-if (GetConsolzSoleScreenBufferInfo(hStdOut,&csbi)){
-	// calculer les nouveaux attributs de couleur
-	wColor=(csbi.WAttributes & 0xB0)+(Forgc & 0x0B);
-       // définir les nouveaux attributs de couleur pour l'affichage
-       SetConsoleTextAttribute(hStdOut,wColor);
-     }
+    // Vérifier les informations sur le tampon de l'écran
+    if (GetConsoleScreenBufferInfo(hStdOut, &csbi)) {
+        // Calculer les nouveaux attributs de couleur
+        WColor = (csbi.wAttributes & 0xF0) + (Forgc & 0x0F);
+        // Définir les nouveaux attributs de couleur pour l'affichage
+        SetConsoleTextAttribute(hStdOut, WColor);
+    }
 }
 
 void login()
@@ -300,7 +301,7 @@ void edit() {
             fgets(s.phonenumber, sizeof(s.phonenumber), stdin);
             s.phonenumber[strcspn(s.phonenumber, "\n")] = '\0';  // Supprimer le '\n'
 
-	        printf("\Enter New Nationality:");
+	        printf("\nEnter New Nationality:");
 	        fgets(s.nationality,sizeof(s.nationality),stdin);
 	        s.nationality[strcspn(s.nationality,"\n")]='\0';
 
