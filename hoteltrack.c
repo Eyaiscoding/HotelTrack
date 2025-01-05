@@ -366,11 +366,6 @@ int main() {
     printf("\t\t*       -----------------------------           *\n");
     printf("\t\t*                                               *\n");
     printf("\t\t*************************************************\n\n\n");
-
-    // Ligne de séparation et date actuelle
-    for (i = 0; i < 80; i++) printf("-");
-    printf("\nCurrent date and time : %s", ctime(&t));
-    for (i = 0; i < 80; i++) printf("-");
     printf("\n Press any key to continue:");
     getch();
 
@@ -402,10 +397,6 @@ int main() {
         printf("\n-----------------");
         printf("\n");
 
-        // Ligne de séparation et date actuelle
-        for (i = 0; i < 80; i++) printf("-");
-        printf("\nCurrent date and time : %s", ctime(&t));
-        for (i = 0; i < 80; i++) printf("-");
 
         // Lecture du choix utilisateur
         choice = getche();
@@ -422,7 +413,7 @@ int main() {
                 break;
             case '3':
                 setcolor(12); // Rouge pour la suppression
-                delete1();
+                delete();
                 break;
             case '4':
                 setcolor(13); // Magenta pour la recherche
