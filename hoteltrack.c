@@ -88,6 +88,9 @@ void add() {
         printf("Enter Customer Details:\n");
         printf("**************************\n");
 
+        // Nettoyer le tampon avant fgets
+        while (getchar() != '\n');
+
         // Lecture des détails avec fgets
         printf("Enter Room number: ");
         fgets(s.roomnumber, sizeof(s.roomnumber), stdin);
@@ -113,6 +116,9 @@ void add() {
         fgets(s.email, sizeof(s.email), stdin);
         s.email[strcspn(s.email, "\n")] = '\0';
 
+        // Nettoyer le tampon avant fgets
+        while (getchar() != '\n');
+
         printf("Enter Period ('x' days): ");
         fgets(s.period, sizeof(s.period), stdin);
         s.period[strcspn(s.period, "\n")] = '\0';
@@ -120,6 +126,9 @@ void add() {
         printf("Enter Arrival date (dd/mm/yyyy): ");
         fgets(s.arrivaldate, sizeof(s.arrivaldate), stdin);
         s.arrivaldate[strcspn(s.arrivaldate, "\n")] = '\0';
+
+        // Nettoyer le tampon 
+        while (getchar() != '\n');
 
         // Écriture des données dans le fichier
         fwrite(&s, sizeof(s), 1, f);
@@ -182,6 +191,8 @@ void list() {
     getchar();  // Attend une touche pour quitter
 }
 
+
+
 void delete()
 {
 	FILE *f, *t;
@@ -194,7 +205,7 @@ void delete()
 		exit(0);
 
 	system("cls"); // Efface l'écran
-    printf("Enter the Room Number of the hotel to be deleted from the database: \n");
+    printf("Enter Room number of the customer to be deleted from the database: \n");
 	scanf("%s", roomnumber); // Lit le numéro de chambre
 	while (fread(&s, sizeof(s), 1, f) == 1) // Parcourt les enregistrements
 	{
