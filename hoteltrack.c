@@ -116,9 +116,6 @@ void add() {
         fgets(s.email, sizeof(s.email), stdin);
         s.email[strcspn(s.email, "\n")] = '\0';
 
-        // Nettoyer le tampon avant fgets
-        while (getchar() != '\n');
-
         printf("Enter Period ('x' days): ");
         fgets(s.period, sizeof(s.period), stdin);
         s.period[strcspn(s.period, "\n")] = '\0';
@@ -126,9 +123,6 @@ void add() {
         printf("Enter Arrival date (dd/mm/yyyy): ");
         fgets(s.arrivaldate, sizeof(s.arrivaldate), stdin);
         s.arrivaldate[strcspn(s.arrivaldate, "\n")] = '\0';
-
-        // Nettoyer le tampon 
-        while (getchar() != '\n');
 
         // Écriture des données dans le fichier
         fwrite(&s, sizeof(s), 1, f);
@@ -354,8 +348,6 @@ void edit() {
 int main() {
     int i = 0; // Initialisation de la variable i pour les boucles
     char choice; // Variable pour stocker le choix du menu
-    time_t t;    // Pour obtenir l'heure actuelle
-    time(&t);    // Charger l'heure dans la variable t
 
     // Nettoyer l'écran et afficher l'introduction
     system("cls");
@@ -393,7 +385,7 @@ int main() {
         for (i = 0; i < 80; i++) printf("-");
 
         printf("\n");
-        printf("\t\t *Please enter your choice for menu*:\n");
+        printf("\t\t  enter your choice for menu:\n");
         printf(" \n Enter 1 -> Book a room");
         printf("\n------------------------");
         printf(" \n Enter 2 -> View Customer Record");
@@ -407,7 +399,6 @@ int main() {
         printf(" \n Enter 6 -> Exit");
         printf("\n-----------------");
         printf("\n");
-
 
         // Lecture du choix utilisateur
         choice = getche();
